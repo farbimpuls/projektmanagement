@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projektmanagement - Farbimpuls</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
+    <style>
+        /* Navigation Styling */
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 20px;
+            background-color: #F7F9FC;
+            color: #333;
+        }
+        nav {
+            display: flex;
+            justify-content: space-around;
+            background-color: #538992;
+            padding: 10px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+        nav button {
+            background-color: transparent;
+            border: none;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+            padding: 10px 20px;
+            border-radius: 5px;
+        }
+        nav button:hover {
+            background-color: #3B6E75;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .button {
+            background-color: #538992;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            border-radius: 5px;
+            margin: 10px 0;
+        }
+        .button:hover {
+            background-color: #3B6E75;
+        }
+        .button-danger {
+            background-color: #FF4D4D;
+        }
+        .button-danger:hover {
+            background-color: #CC0000;
+        }
+        .hidden {
+            display: none;
+        }
+        .form-section {
+            background-color: white;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 10px 0;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        input, select {
+            display: block;
+            width: calc(100% - 20px);
+            margin: 10px auto;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+        .photo-preview img {
+            max-width: 100px;
+            margin: 5px;
+            border-radius: 5px;
+        }
+        .pagination {
+            display: flex;
+            justify-content: center;
+            margin: 10px 0;
+        }
+        .pagination button {
+            background-color: #538992;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            margin: 0 5px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        .pagination button.active {
+            background-color: #3B6E75;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <nav>
+        <button id="newProjectNav">Neues Projekt</button>
+        <button id="projectsNav">Projekte</button>
+        <button id="customersNav">Kunden</button>
+    </nav>
+
+    <!-- Neues Projekt -->
+    <div id="newProject" class="form-section hidden">
+        <h2>Neues Projekt</h2>
+        <select id="customerSelect">
+            <option value="">Kunde auswählen</option>
+        </select>
+        <input type="text" id="projectName" placeholder="Projektnamen eingeben">
+        <div id="itemsContainer"></div>
+        <button class="button" id="addItemBtn">+ Ausmass hinzufügen</button>
+        <input type="file" id="photoUpload" accept="image/*" multiple>
+        <div id="photoPreview" class="photo-preview"></div>
+        <button class="button" id="saveProjectBtn">Projekt speichern</button>
+    </div>
+
+    <!-- Projekte Übersicht -->
+    <div id="projects" class="form-section hidden">
+        <h2>Gespeicherte Projekte</h2>
+        <div id="projectsList"></div>
+        <div class="pagination" id="projectsPagination"></div>
+    </div>
+
+    <!-- Kunden Übersicht -->
+    <div id="customers" class="form-section hidden">
+        <h2>Kunden</h2>
+        <div id="customersList"></div>
+        <div class="pagination" id="customersPagination"></div>
+        <h3>Neuen Kunden erstellen</h3>
+        <input type="text" id="customerName" placeholder="Kundenname">
+        <input type="text" id="customerAddress" placeholder="Adresse">
+        <button class="button" id="saveCustomerBtn">Kunden speichern</button>
+    </div>
+
+    <!-- Projektdetails -->
+    <div id="projectDetailsSection" class="form-section hidden">
+        <h2>Projektdetails</h2>
+        <div id="detailsContent"></div>
+        <button class="button" id="exportPdfBtn" style="background-color: orange;">Als PDF speichern</button>
+        <button class="button" id="closeDetailsBtn">Schließen</button>
+    </div>
+</div>
+
+<script>
+    const { jsPDF } = window.jspdf;
+
+    const newProjectNav = document.getElementById('newProjectNav');
+    const projectsNav = document.getElementById('projectsNav');
+    const customersNav = document.getElementById('customersNav');
+    const newProjectSection = document.getElementById('newProject');
+    const projectsSection = document.getElementById('projects');
+    const customersSection = document.getElementById('customers');
+    const customersList = document.getElementById('customersList');
+    const projectsList = document.getElementById('projectsList');
+    const customerSelect = document.getElementById('customerSelect');
+    const customerNameInput = document.getElementById('customerName');
+    const customerAddressInput = document.getElementById('customerAddress');
+    const saveCustomerBtn = document.getElementById('saveCustomerBtn');
+    const saveProjectBtn = document.getElementById('saveProjectBtn');
+    const addItemBtn = document.getElementById('addItemBtn');
+    const itemsContainer = document.getElementById('itemsContainer');
+    const photoUpload = document.getElementById('photoUpload');
+    const photoPreview = document.getElementById('photoPreview');
+    const projectsPagination = document.getElementById('projectsPagination');
+    const customersPagination = document.getElementById('customersPagination');
+    const projectNameInput = document.getElementById('projectName');
+
+    let customers = [];
+    let projects = [];
+    let itemsPerPage = 10;
+
+    // Dynamische Logik für Navigation und Interaktionen
+</script>
+</body>
+</html>
